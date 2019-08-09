@@ -15,6 +15,8 @@ RUN dotnet publish -c Release -r linux-musl-x64 -o /app
 
 FROM microsoft/dotnet:2.2-aspnetcore-runtime-alpine
 WORKDIR /app
-COPY --from=builder /app .
-COPY --from=node /app/build ./wwwroot
-ENTRYPOINT ["./AspNetCoreDemoApp"]
+#COPY --from=builder /app .
+#COPY --from=node /app/build ./wwwroot
+#ENTRYPOINT ["./AspNetCoreDemoApp"]
+COPY Backend /app
+ENTRYPOINT ["dotnet", "Alumni.Web.dll"]
